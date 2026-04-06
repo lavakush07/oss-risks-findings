@@ -1,6 +1,10 @@
 /**
  * OSS supply-chain risks — single training file covering four categories.
  *
+ * SCA tools (e.g. ShiftLeft / Qwiet) resolve dependencies from the repo root
+ * package.json and lockfile, not from JavaScript literals below. Use
+ * ../package.json for scans that report package counts and OSS risks.
+ *
  * Do not copy these patterns into production. This file is for education
  * and security review demos only.
  *
