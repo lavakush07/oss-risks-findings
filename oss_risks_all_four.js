@@ -1,9 +1,23 @@
 /**
  * OSS supply-chain risks — single training file covering four categories.
  *
- * SCA tools (e.g. ShiftLeft / Qwiet) resolve dependencies from the repo root
- * package.json and lockfile, not from JavaScript literals below. Use
- * ../package.json for scans that report package counts and OSS risks.
+ * SCA tools (e.g. ShiftLeft / Qwiet) resolve dependencies from manifests (repo root
+ * package.json, ecosystems/golang, etc.), not from JavaScript literals below.
+ *
+ * VulnCheck research-attribute coverage by ecosystem (see vulncheck_purl_catalog.json
+ * and https://docs.vulncheck.com/products/exploit-and-vulnerability-intelligence/package-url-detections ):
+ * malicious → gem, npm, nuget, pypi | abandoned → golang | hijackable repo → golang |
+ * typosquatting → gem, golang, npm, nuget, pypi
+ *
+ * ShiftLeft / Qwiet UI (Findings):
+ * - The count on the Findings tab often reflects OSS CVEs / other finding types,
+ *   not necessarily rows labeled with every OSS Risk sub-type (Abandoned,
+ *   Malicious, Squatted, Hijackable repository).
+ * - If you select several OSS Risk checkboxes and see "0 results", try: clear
+ *   OSS Risk filters and use one category at a time (some UIs combine filters
+ *   as AND). Click the Findings tab title to reset filters (per Qwiet docs).
+ * - Also check Finding Type (e.g. OSS Vulnerabilities vs OSS Risk) so it is
+ *   not excluding the rows you expect.
  *
  * Do not copy these patterns into production. This file is for education
  * and security review demos only.

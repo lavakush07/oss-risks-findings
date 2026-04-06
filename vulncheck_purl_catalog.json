@@ -1,0 +1,38 @@
+{
+  "$schema_comment": "PURLs copied from VulnCheck Package URL Detections docs. Use with VulnCheck API; do not blindly install malicious packages.",
+  "source": "https://docs.vulncheck.com/products/exploit-and-vulnerability-intelligence/package-url-detections",
+  "ecosystem_support_summary": {
+    "malicious_package": ["gem", "npm", "nuget", "pypi"],
+    "abandoned_package": ["golang"],
+    "hijackable_repository": ["golang"],
+    "typosquatting": ["gem", "golang", "npm", "nuget", "pypi"]
+  },
+  "examples": [
+    {
+      "oss_risk": "malicious_package",
+      "purl": "pkg:npm/aliyundrive@6.0.4",
+      "note": "Do not npm install; query VulnCheck API only."
+    },
+    {
+      "oss_risk": "abandoned_package",
+      "purl": "pkg:golang/github.com/paysuper/paysuper-reporter@v1.4.2",
+      "note": "VulnCheck golang example; upstream module graph may no longer resolve with go get."
+    },
+    {
+      "oss_risk": "hijackable_repository",
+      "purl": "pkg:golang/github.com/zerobounty/tile38-client@v0.10.2",
+      "note": "VulnCheck golang example; module path may have changed upstream — prefer PURL API lookup."
+    },
+    {
+      "oss_risk": "typosquatting",
+      "purl": "pkg:gem/activmodel@5.2.1",
+      "squatted_target": "activemodel"
+    },
+    {
+      "oss_risk": "typosquatting",
+      "purl": "pkg:npm/expres@0.0.5",
+      "squatted_target": "express",
+      "note": "Also declared in root package.json for npm graph scans."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+# VulnCheck typosquatting example PURL: pkg:gem/activmodel@5.2.1 (see vulncheck_purl_catalog.json).
+# Do not `bundle install` that gem in untrusted environments — use VulnCheck API for research.
+
+gem "json", "~> 2.0"

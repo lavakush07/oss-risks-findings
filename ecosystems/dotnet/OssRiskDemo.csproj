@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- VulnCheck: malicious + typosquatting supported for nuget (per Package URL Detections docs). -->
+  <!-- Add PackageReference entries your scanner should ingest; keep SDK-style for `dotnet restore`. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OssRiskDemo</RootNamespace>
+  </PropertyGroup>
+</Project>

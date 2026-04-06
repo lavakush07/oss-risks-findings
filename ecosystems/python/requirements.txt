@@ -1,0 +1,4 @@
+# VulnCheck: malicious + typosquatting supported for pypi (per Package URL Detections docs).
+# Do not add known-malicious pins here. Use vulncheck_purl_catalog.json for API PURL queries.
+# Example benign pin for tooling that needs a non-empty graph:
+# requests>=2.31.0

@@ -2,14 +2,9 @@
   "name": "oss-risks-findings",
   "version": "1.0.0",
   "private": true,
-  "description": "Training repo for SCA/OSS risk tools (ShiftLeft, etc.). Real manifest so scanners see a dependency graph; see oss_risks_all_four.js for narrative.",
-  "scripts": {
-    "postinstall": "node -e \"console.log('[training] harmless postinstall'); process.exit(0);\""
-  },
+  "description": "VulnCheck-aligned layouts: npm typosquatting (expres). Malicious npm PURL: vulncheck_purl_catalog.json (do not install). Go abandoned+hijackable: ecosystems/golang/.",
   "dependencies": {
-    "request": "^2.88.2",
-    "lodash": "^4.17.21",
     "expres": "^0.0.5",
-    "inherits-insecure-git-demo": "git+http://github.com/isaacs/inherits.git"
+    "lodash": "^4.17.21"
   }
 }
