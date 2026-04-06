@@ -2,9 +2,15 @@
   "name": "oss-risks-findings",
   "version": "1.0.0",
   "private": true,
-  "description": "VulnCheck-aligned layouts: npm typosquatting (expres). Malicious npm PURL: vulncheck_purl_catalog.json (do not install). Go abandoned+hijackable: ecosystems/golang/.",
+  "description": "SCA/OSS demo: deprecated + CVE graph (request), typosquat-style name (expres), git+http source, postinstall lifecycle. Lockfile must be committed. See vulncheck_purl_catalog.json for VulnCheck PURL API examples.",
+  "scripts": {
+    "postinstall": "node -e \"console.log('[training] postinstall'); process.exit(0);\""
+  },
   "dependencies": {
+    "request": "^2.88.2",
+    "express": "^4.21.0",
+    "lodash": "^4.17.21",
     "expres": "^0.0.5",
-    "lodash": "^4.17.21"
+    "inherits-insecure-git-demo": "git+http://github.com/isaacs/inherits.git"
   }
 }

@@ -9,6 +9,10 @@
  * malicious → gem, npm, nuget, pypi | abandoned → golang | hijackable repo → golang |
  * typosquatting → gem, golang, npm, nuget, pypi
  *
+ * If SCA shows zero findings: ensure the scan uses root package.json + package-lock.json
+ * (tiny graphs like lodash+expres alone often have no CVEs). request + lockfile restores
+ * a typical vulnerable transitive set for OSS vulnerability findings.
+ *
  * ShiftLeft / Qwiet UI (Findings):
  * - The count on the Findings tab often reflects OSS CVEs / other finding types,
  *   not necessarily rows labeled with every OSS Risk sub-type (Abandoned,
