@@ -4,10 +4,9 @@
  * SCA tools (e.g. ShiftLeft / Qwiet) resolve dependencies from manifests (repo root
  * package.json, ecosystems/golang, etc.), not from JavaScript literals below.
  *
- * VulnCheck research-attribute coverage by ecosystem (see vulncheck_purl_catalog.json
- * and https://docs.vulncheck.com/products/exploit-and-vulnerability-intelligence/package-url-detections ):
- * malicious → gem, npm, nuget, pypi | abandoned → golang | hijackable repo → golang |
- * typosquatting → gem, golang, npm, nuget, pypi
+ * VulnCheck: four OSS risk labels and supported ecosystems (see vulncheck_purl_catalog.json
+ * and https://docs.vulncheck.com/products/exploit-and-vulnerability-intelligence/package-url-detections ).
+ * Exported as OSS_RISK_SUPPORTED_ECOSYSTEMS below.
  *
  * If SCA shows zero findings: ensure the scan uses root package.json + package-lock.json
  * (tiny graphs like lodash+expres alone often have no CVEs). request + lockfile restores
@@ -45,6 +44,22 @@
  * ---------------------------------------------------------------------------
  */
 
+/** @type {Record<string, readonly string[]>} UI / policy labels → package ecosystems VulnCheck documents for that risk. */
+const OSS_RISK_SUPPORTED_ECOSYSTEMS = Object.freeze({
+  Abandoned: Object.freeze(["golang"]),
+  Malicious: Object.freeze(["gem", "npm", "nuget", "pypi"]),
+  Squatted: Object.freeze(["gem", "golang", "npm", "nuget", "pypi"]),
+  "Hijackable Repository": Object.freeze(["golang"]),
+});
+
+/** Maps catalog keys to the same labels (for JSON `oss_risks[].label`). */
+const OSS_RISK_LABEL_BY_ATTRIBUTE = Object.freeze({
+  abandoned: "Abandoned",
+  is_malicious: "Malicious",
+  squatted_package: "Squatted",
+  repo_hijackable: "Hijackable Repository",
+});
+
 /* -------------------------------------------------------------------------- */
 /* 1. MALICIOUS PACKAGE — lifecycle script (illustrative only, harmless)      */
 /* -------------------------------------------------------------------------- */
@@ -61,32 +76,56 @@ const maliciousPackageIllustration = {
 
 /* -------------------------------------------------------------------------- */
 /* 2. ABANDONED PACKAGE — deprecated / unmaintained (still resolves on npm)   */
+/*    VulnCheck attribute: abandoned (golang only)                            */
+/*    Example PURL: pkg:golang/github.com/paysuper/paysuper-reporter@v1.4.2   */
+/*    See: ecosystems/golang/go.mod                                           */
 /* -------------------------------------------------------------------------- */
 const abandonedPackageIllustration = {
   dependencies: {
     // `request` is deprecated and unmaintained; prefer `fetch`, `undici`, `axios`, etc.
     request: "^2.88.2",
   },
+  // golang: github.com/paysuper/paysuper-reporter v1.4.2 (in ecosystems/golang/go.mod)
 };
 
 /* -------------------------------------------------------------------------- */
-/* 3. HIJACKABLE REPOSITORY — git+http, floating ref (branch name, not hash) */
+/* 3. HIJACKABLE REPOSITORY — weak custody or unsafe resolution               */
+/*    VulnCheck attribute: repo_hijackable (golang only)                      */
+/*    Example PURL: pkg:golang/github.com/zerobounty/tile38-client@v0.10.2    */
+/*    See: ecosystems/golang/go.mod                                           */
 /* -------------------------------------------------------------------------- */
 const hijackableRepositoryIllustration = {
   dependencies: {
     // git+http allows MITM; #main can change without your lockfile knowing the commit
     "demo-from-insecure-vcs": "git+http://example.com/unsafe/repo.git#main",
   },
+  // golang: github.com/zerobounty/tile38-client v0.10.2 (in ecosystems/golang/go.mod)
 };
 
 /* -------------------------------------------------------------------------- */
-/* 4. TYPOSQUATTING — name similar to a popular package (FAKE NAME BELOW)     */
+/* 4. TYPOSQUATTING — names look like popular packages                        */
+/*    VulnCheck attribute: squatted_package                                   */
+/*    Supported: gem, golang, npm, nuget, pypi                                */
+/*    Examples:                                                               */
+/*      - npm: expres → express (root package.json)                           */
+/*      - gem: activmodel → activemodel, raills → rails (ecosystems/ruby)     */
+/*      - nuget: Newtonsoftjson → Newtonsoft.Json (ecosystems/dotnet)         */
+/*      - pypi: numpyy → numpy, reqeusts → requests (ecosystems/python)       */
 /* -------------------------------------------------------------------------- */
 const typosquattingIllustration = {
   dependencies: {
     // Intentionally fake name mimicking "lodash" — do not publish a real typosquat.
     lodahs: "^9.9.9-typo-demo-only",
-    // Real-world typos often target: react, express, cross-env, lodash, etc.
+    // npm: expres → express (root package.json)
+    expres: "^4.17.1",
+    // gem: activmodel → activemodel, raills → rails (ecosystems/ruby)
+    activmodel: "^6.1.3",
+    raills: "^6.1.3",
+    // nuget: Newtonsoftjson → Newtonsoft.Json (ecosystems/dotnet)
+    Newtonsoftjson: "^13.0.1",
+    // pypi: numpyy → numpy, reqeusts → requests (ecosystems/python)
+    numpyy: "^1.20.0",
+    reqeusts: "^2.25.1",
   },
 };
 
@@ -109,6 +148,8 @@ const combinedTrainingManifest = {
 };
 
 module.exports = {
+  OSS_RISK_SUPPORTED_ECOSYSTEMS,
+  OSS_RISK_LABEL_BY_ATTRIBUTE,
   maliciousPackageIllustration,
   abandonedPackageIllustration,
   hijackableRepositoryIllustration,

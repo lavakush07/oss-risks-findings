@@ -1,0 +1,2 @@
+module MaliciousLifecycle
+end

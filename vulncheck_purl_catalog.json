@@ -1,38 +1,131 @@
 {
-  "$schema_comment": "PURLs copied from VulnCheck Package URL Detections docs. Use with VulnCheck API; do not blindly install malicious packages.",
+  "$schema_comment": "OSS risk labels ↔ ecosystems per VulnCheck Package URL Detections. PURLs for API queries; do not blindly install malicious packages.",
   "source": "https://docs.vulncheck.com/products/exploit-and-vulnerability-intelligence/package-url-detections",
-  "ecosystem_support_summary": {
-    "malicious_package": ["gem", "npm", "nuget", "pypi"],
-    "abandoned_package": ["golang"],
-    "hijackable_repository": ["golang"],
-    "typosquatting": ["gem", "golang", "npm", "nuget", "pypi"]
-  },
-  "examples": [
+  "oss_risks": [
     {
-      "oss_risk": "malicious_package",
-      "purl": "pkg:npm/aliyundrive@6.0.4",
-      "note": "Do not npm install; query VulnCheck API only."
+      "label": "Abandoned",
+      "vulncheck_research_attribute": "abandoned",
+      "supported_ecosystems": ["golang"],
+      "example_purls": [
+        {
+          "ecosystem": "golang",
+          "purl": "pkg:golang/github.com/paysuper/paysuper-reporter@v1.4.2",
+          "note": "Doc example; module may not go get today."
+        }
+      ]
     },
     {
-      "oss_risk": "abandoned_package",
-      "purl": "pkg:golang/github.com/paysuper/paysuper-reporter@v1.4.2",
-      "note": "VulnCheck golang example; upstream module graph may no longer resolve with go get."
+      "label": "Malicious",
+      "vulncheck_research_attribute": "is_malicious",
+      "supported_ecosystems": ["gem", "npm", "nuget", "pypi"],
+      "example_purls": [
+        {
+          "ecosystem": "npm",
+          "purl": "pkg:npm/aliyundrive@6.0.4",
+          "note": "Do not npm install; VulnCheck API / research only."
+        },
+        {
+          "ecosystem": "gem",
+          "purl": null,
+          "note": "Supported for malicious; supply a gem PURL from VulnCheck API results."
+        },
+        {
+          "ecosystem": "nuget",
+          "purl": null,
+          "note": "Supported for malicious; supply a nuget PURL from VulnCheck API results."
+        },
+        {
+          "ecosystem": "pypi",
+          "purl": null,
+          "note": "Supported for malicious; supply a PyPI PURL from VulnCheck API results."
+        }
+      ]
     },
     {
-      "oss_risk": "hijackable_repository",
-      "purl": "pkg:golang/github.com/zerobounty/tile38-client@v0.10.2",
-      "note": "VulnCheck golang example; module path may have changed upstream — prefer PURL API lookup."
+      "label": "Squatted",
+      "vulncheck_research_attribute": "squatted_package",
+      "supported_ecosystems": ["gem", "golang", "npm", "nuget", "pypi"],
+      "example_purls": [
+        {
+          "ecosystem": "npm",
+          "purl": "pkg:npm/expres@0.0.5",
+          "squatted_target": "express",
+          "note": "Also in root package.json for npm graph scans."
+        },
+        {
+          "ecosystem": "gem",
+          "purl": "pkg:gem/activmodel@5.2.1",
+          "squatted_target": "activemodel"
+        },
+        {
+          "ecosystem": "golang",
+          "purl": null,
+          "note": "Typosquatting supported; supply golang PURL from VulnCheck API."
+        },
+        {
+          "ecosystem": "nuget",
+          "purl": "pkg:nuget/Newtonsoftjson@13.0.1",
+          "squatted_target": "Newtonsoft.Json",
+          "note": "In ecosystems/dotnet/OssRiskDemo.csproj"
+        },
+        {
+          "ecosystem": "pypi",
+          "purl": "pkg:pypi/numpyy@0.1.0",
+          "squatted_target": "numpy",
+          "note": "In ecosystems/python/requirements.txt"
+        }
+      ]
     },
     {
-      "oss_risk": "typosquatting",
+      "label": "Hijackable Repository",
+      "vulncheck_research_attribute": "repo_hijackable",
+      "supported_ecosystems": ["golang"],
+      "example_purls": [
+        {
+          "ecosystem": "golang",
+          "purl": "pkg:golang/github.com/zerobounty/tile38-client@v0.10.2",
+          "note": "Doc example; module path may have changed — prefer PURL API lookup."
+        }
+      ]
+    }
+  ],
+  "examples_flat": [
+    {
+      "oss_risk_label": "Malicious",
+      "purl": "pkg:npm/aliyundrive@6.0.4"
+    },
+    {
+      "oss_risk_label": "Abandoned",
+      "purl": "pkg:golang/github.com/paysuper/paysuper-reporter@v1.4.2"
+    },
+    {
+      "oss_risk_label": "Hijackable Repository",
+      "purl": "pkg:golang/github.com/zerobounty/tile38-client@v0.10.2"
+    },
+    {
+      "oss_risk_label": "Squatted",
       "purl": "pkg:gem/activmodel@5.2.1",
       "squatted_target": "activemodel"
     },
     {
-      "oss_risk": "typosquatting",
+      "oss_risk_label": "Squatted",
       "purl": "pkg:npm/expres@0.0.5",
-      "squatted_target": "express",
-      "note": "Also declared in root package.json for npm graph scans."
+      "squatted_target": "express"
+    },
+    {
+      "oss_risk_label": "Squatted",
+      "purl": "pkg:nuget/Newtonsoftjson@13.0.1",
+      "squatted_target": "Newtonsoft.Json"
+    },
+    {
+      "oss_risk_label": "Squatted",
+      "purl": "pkg:pypi/numpyy@0.1.0",
+      "squatted_target": "numpy"
+    },
+    {
+      "oss_risk_label": "Squatted",
+      "purl": "pkg:gem/raills@0.0.1",
+      "squatted_target": "rails"
     }
   ]
 }
