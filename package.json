@@ -11,6 +11,9 @@
     "express": "^4.21.0",
     "lodash": "^4.17.21",
     "expres": "^0.0.5",
-    "inherits-insecure-git-demo": "git+http://github.com/isaacs/inherits.git"
+    "inherits-insecure-git-demo": "git+http://github.com/isaacs/inherits.git",
+    "fs": "0.0.1-security",
+    "tslib": "2.3.1",
+    "tslib-2-3-0": "npm:tslib@2.3.0"
   }
 }
