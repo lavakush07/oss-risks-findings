@@ -9,5 +9,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <!-- Typosquatting: misspelled package name targeting Newtonsoft.Json -->
     <PackageReference Include="Newtonsoftjson" Version="13.0.1" />
+    <!-- Malicious Package: known malicious NuGet package (VulnCheck: is_malicious) -->
+    <PackageReference Include="Colorful.Console.Helper" Version="1.0.0" />
   </ItemGroup>
 </Project>
