@@ -22,7 +22,7 @@
         {
           "ecosystem": "npm",
           "purl": "pkg:npm/aliyundrive@6.0.4",
-          "note": "Do not npm install; VulnCheck API / research only."
+          "note": "In root package.json; do not npm install."
         },
         {
           "ecosystem": "gem",

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "local-malicious-lifecycle": "file:ecosystems/npm/local-malicious-lifecycle",
+    "aliyundrive": "6.0.4",
     "request": "^2.88.2",
     "express": "^4.21.0",
     "lodash": "^4.17.21",
