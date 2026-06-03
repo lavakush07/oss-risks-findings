@@ -3,18 +3,28 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "node -e \"process.exit(0)\""
+    "postinstall": "node -e \"process.exit(0)\"",
+    "api": "node api/cud-api.js"
   },
   "dependencies": {
     "local-malicious-lifecycle": "file:ecosystems/npm/local-malicious-lifecycle",
     "aliyundrive": "6.0.4",
-    "request": "^2.88.2",
     "express": "^4.21.0",
+    "request": "^2.88.2",
     "lodash": "^4.17.21",
-    "expres": "^0.0.5",
+    "expres": "0.0.5",
+    "lodas": "1.2.0",
+    "lodahs": "0.0.1-security",
+    "loadsh": "0.0.4",
+    "reqeust": "2.81.1",
+    "crossenv": "1.0.0",
+    "axois": "0.0.1-security",
+    "momnet": "0.0.1-security",
+    "recat": "0.0.0",
     "inherits-insecure-git-demo": "git+http://github.com/isaacs/inherits.git",
-    "fs": "0.0.1-security",
-    "tslib": "2.3.1",
-    "tslib-2-3-0": "npm:tslib@2.3.0"
+    "express-eol": "npm:express@3.21.2",
+    "connect": "2.30.2",
+    "node-uuid": "1.4.8",
+    "gulp": "3.9.1"
   }
 }

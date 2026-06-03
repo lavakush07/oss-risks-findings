@@ -12,6 +12,7 @@ A multi-language test application with all four OSS supply-chain risks injected 
 | **Abandoned** | `abandoned` | golang | ✅ golang |
 | **Hijackable Repository** | `repo_hijackable` | golang | ✅ golang |
 | **Squatted** | `squatted_package` | gem, golang, npm, nuget, pypi | ✅ All five |
+| **End of Life** | EOL risk score ≥ 60 | npm, maven, pypi | ✅ npm, maven, pypi |
 
 ## Injected Packages by Risk Type
 
@@ -49,7 +50,22 @@ A multi-language test application with all four OSS supply-chain risks injected 
 | nuget | `Newtonsoftjson@13.0.1` | Newtonsoft.Json | `ecosystems/dotnet/OssRiskDemo.csproj` |
 | pypi | `numpyy@0.1.0` | numpy | `ecosystems/python/requirements.txt` |
 | pypi | `reqeusts` | requests | `ecosystems/python/requirements.txt` |
-| golang | `boringssl` typosquat | boringssl | `go.mod` |
+| golang | `github.com/aboringcompany/boringssl` | boringssl | `go.mod` |
+
+### 5. End of Life (EOL)
+
+| Ecosystem | Package | File |
+|-----------|---------|------|
+| npm | `express-eol` → `express@3.21.2` | `package.json` |
+| npm | `connect@2.30.2` | `package.json` |
+| npm | `node-uuid@1.4.8` | `package.json` |
+| npm | `gulp@3.9.1` | `package.json` |
+| pypi | `Django==1.11.29` | `ecosystems/python/requirements.txt` |
+| pypi | `Flask==0.12.5` | `ecosystems/python/requirements.txt` |
+| pypi | `cryptography==2.3.1` | `ecosystems/python/requirements.txt` |
+| maven | `log4j:log4j:1.2.17` | `ecosystems/java/pom.xml` |
+| maven | `spring-core:3.2.18.RELEASE` | `ecosystems/java/pom.xml` |
+| maven | `struts-core:1.3.10` | `ecosystems/java/pom.xml` |
 
 ## Directory Structure
 
@@ -60,6 +76,8 @@ oss-risks-findings/
 ├── ecosystems/
 │   ├── dotnet/
 │   │   └── OssRiskDemo.csproj  # nuget: malicious, squatted
+│   ├── java/
+│   │   └── pom.xml             # maven: end of life
 │   ├── golang/
 │   │   └── go.mod              # golang risks (duplicate of root)
 │   ├── npm/
